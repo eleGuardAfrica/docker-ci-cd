@@ -24,10 +24,10 @@ jobs:
       id: config
       run: |
         if [ "${{ github.ref }}" == "refs/heads/main" ]; then
-          echo "webapp_name=${{ secrets.WEBAPP_NAME }}" >> $GITHUB_OUTPUT
+          echo "webapp_name=${{ secrets.WEBAPP_NAME_PROD }}" >> $GITHUB_OUTPUT
           echo "environment=production" >> $GITHUB_OUTPUT
         else
-          echo "webapp_name=${{ secrets.WEBAPP_NAME }}" >> $GITHUB_OUTPUT
+          echo "webapp_name=${{ secrets.WEBAPP_NAME_STAGING }}" >> $GITHUB_OUTPUT
           echo "environment=staging" >> $GITHUB_OUTPUT
         fi
 
@@ -53,4 +53,3 @@ jobs:
         echo "📦 Web App: ${{ steps.config.outputs.webapp_name }}"
         echo "🔗 Image: ${{ env.REGISTRY_LOGIN_SERVER }}/${{ steps.config.outputs.webapp_name }}:latest"
 
-        
