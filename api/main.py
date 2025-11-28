@@ -22,7 +22,7 @@ def post_now(post: str, platforms: list):
 
 @app.get("/")
 def hello():
-    return {"message": "Hello, World!"}
+    return {"message": "Hello, Allord!"}
 
 
 @app.post("/share")
