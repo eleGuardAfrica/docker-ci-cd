@@ -24,10 +24,10 @@ jobs:
       id: config
       run: |
         if [ "${{ github.ref }}" == "refs/heads/main" ]; then
-          echo "webapp_name=${{ secrets.WEBAPP_NAME }}" >> $GITHUB_OUTPUT
+          echo "webapp_name=${{ secrets.WEBAPP_NAME_PROD }}" >> $GITHUB_OUTPUT
           echo "environment=production" >> $GITHUB_OUTPUT
         else
-          echo "webapp_name=${{ secrets.WEBAPP_NAME }}" >> $GITHUB_OUTPUT
+          echo "webapp_name=${{ secrets.WEBAPP_NAME_STAGING }}" >> $GITHUB_OUTPUT
           echo "environment=staging" >> $GITHUB_OUTPUT
         fi
 
@@ -52,18 +52,4 @@ jobs:
         echo "✅ Deployed to: ${{ steps.config.outputs.environment }}"
         echo "📦 Web App: ${{ steps.config.outputs.webapp_name }}"
         echo "🔗 Image: ${{ env.REGISTRY_LOGIN_SERVER }}/${{ steps.config.outputs.webapp_name }}:latest"
-```
 
-## 🎯 How it works:
-
-1. **Push to `develop`** → Builds image → Pushes as `runwei-admin-staging:latest` → Staging webhook deploys
-2. **Push to `main`** → Builds image → Pushes as `runwei-admin:latest` → Production webhook deploys
-
-## 📁 File structure:
-```
-your-repo/
-├── .github/
-│   └── workflows/
-│       └── deploy.yml        # ← Just ONE file!
-├── Dockerfile
-└── your app code...
