@@ -52,4 +52,3 @@ jobs:
         echo "✅ Deployed to: ${{ steps.config.outputs.environment }}"
         echo "📦 Web App: ${{ steps.config.outputs.webapp_name }}"
         echo "🔗 Image: ${{ env.REGISTRY_LOGIN_SERVER }}/${{ steps.config.outputs.webapp_name }}:latest"
-
